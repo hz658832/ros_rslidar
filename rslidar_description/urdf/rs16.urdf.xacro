@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!--
+Copyright (c) 2019, ROBOSENSE.
+
+All rights reserved.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+"AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+
+<robot name="rs16" xmlns:xacro="http://wiki.ros.org/xacro">
+
+  <xacro:macro name="rs16" params="name frame_id parent *origin">
+    <link name="${name}_base_link">
+      <inertial>
+        <mass value="0.87" />
+        <origin xyz="0 0 0" />
+        <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" />
+      </inertial>
+      <visual>
+        <geometry>
+          <mesh filename="package://rslidar_description/mesh/RS16.stl"/>
+        </geometry>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+      </visual>
+    </link>
+
+    <joint name="${name}_joint" type="fixed">
+      <insert_block name="origin" />
+      <parent link="${parent}"/>
+      <child link="${name}_base_link" />
+    </joint>
+
+    <link name="${frame_id}"/>
+    <joint name="${frame_id}_joint" type="fixed">
+        <origin rpy="0 0 0" xyz="0 0 0.0398" />
+        <parent link="${name}_base_link" />
+        <child link="${frame_id}" />
+    </joint>
+
+  </xacro:macro>
+</robot>

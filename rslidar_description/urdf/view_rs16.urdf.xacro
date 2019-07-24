@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<robot name="view_rs16" xmlns:xacro="http://wiki.ros.org/xacro">
+  <xacro:include filename="$(find rslidar_description)/urdf/rs16.urdf.xacro"/>
+  
+  <link name="world" />
+
+  <rs16 name="rs16" frame_id="rslidar" parent="world">
+    <origin rpy="0 0 0" xyz="0 0 0" />
+  </rs16>
+
+</robot>
